@@ -13,6 +13,7 @@ services:
     depends_on:
       - api1
       - api2
+      - silver1
 
   api1:
     image: myapi:latest
@@ -31,6 +32,15 @@ services:
       dockerfile: Dockerfile
     container_name: api2
     restart: unless-stopped
+    networks:
+      - internal_network
+
+  silver1:
+    image: silver:latest
+    build:
+      context: silver/
+      dockerfile: Dockerfile
+    container_name: silver1
     networks:
       - internal_network
 
