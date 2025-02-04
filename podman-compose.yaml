@@ -24,10 +24,6 @@ services:
     networks:
       - internal_network
 
-    #expose:
-     # - "5000"
-
-
   api2:
     image: myapi:latest
     build: 
@@ -37,9 +33,7 @@ services:
     restart: unless-stopped
     networks:
       - internal_network
-    #expose:
-     # - "5000"
-     #
+
 networks:
   internal_network:
     driver: bridge
