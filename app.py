@@ -13,23 +13,10 @@ SILVERHOLDINGS = int(os.getenv("silverholdings", 1))
 MYHOLDINGS = os.getenv("myholdingsstring", "my new string")
 
 
-#app = Dash(__name__,  routes_pathname_prefix='/silver/', title='Work in progress')
 app = Dash(__name__,  title='Work in progress')
 
 server = app.server
 
-# @server.route("/health")
-# def health_check():
-#     try:
-#         status = get_melt_prices(1, 1)
-#         if not status or not isinstance(status, list) or 'meltprice' not in status[0]:
-#             return jsonify(status="error", message="Invalid response from get_melt_prices()"), 500
-#         melt_price = status[0]['meltprice']
-#         health = "ok" if melt_price > 1 else "bad"
-#         return jsonify(status=health, meltprice=melt_price), 200 if health == "ok" else 503
-#
-#     except Exception as e:
-#         return jsonify(status="error", message=str(e)), 500
 STATE = None
 @server.route("/health")
 def health_check():
@@ -142,31 +129,11 @@ style={
                 ),
                 dcc.Graph(
                     id="gold_wish",
-                    # style={
-                    #     "width": "25%",
-                    #     "height": "25%",
-                    #     #"margin": "250px",
-                    # },  # Adjusted height
-                    #style={'width': '55vh', 'height': '65vh', 'marginLeft': 'auto', 'marginRight': 'auto'},
-                    # style={
-                    #     'width': '55vh',
-                    #     'height': '55vh',
-                    #     'marginLeft': 'auto',
-                    #     'marginRight': 'auto',
-                    #     'marginTop': '0',       # Align with the top
-                    #     #'position': 'relative',  # Ensure it's relative to the top
-                    #     #'position': 'absolute',  # Align it to the top
-                    #     #'top': '0',  # Set to top of its container
-                    #                 "padding-top": "1vh",  # Reduce padding here if needed
-                    # }
 style={
-        'width': '55vh',         # Adjusted width for better fit
-        'height': '55vh',        # Adjusted height to match
-        'margin': '0 auto',      # Centers the gauge horizontally
-        'padding-top': '2vh',    # Small top padding for spacing
-        #'border-radius': '15px', # Rounded corners for a modern look
-        #'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow effect
-        #'background-color': '#f9f9f9',  # Light background for contrast
+        'width': '55vh',
+        'height': '55vh',
+        'margin': '0 auto',
+        'padding-top': '2vh',
     },
                 ),
             ],
@@ -175,23 +142,10 @@ style={
                 "justify-content": "space-evenly",
                 "width": "100%",
                 'height': '45vh',
-
-                #"height": "10%", # This
-                #'marginTop': '0',  # Align with the top
-                #'position': 'relative',  # Ensure it's relative to the top
-                #"padding-bottom": "10%",  # Reduce padding here if needed
-                "padding-bottom": "85vh",  # Reduce padding here if needed
-                "padding-top": "1vh",  # Reduce padding here if needed
+                "padding-bottom": "85vh",
+                "padding-top": "1vh",
 
             },
-            # style={
-            #     'width': '55vh',
-            #     'height': '65vh',
-            #     'marginLeft': 'auto',
-            #     'marginRight': 'auto',
-            #     'marginTop': '0',       # Align with the top
-            #     'position': 'relative'  # Ensure it's relative to the top
-            # }
         ),
         html.Div(
             [
@@ -419,8 +373,6 @@ style={
     ]
 )
 
-
-# Define callback to update all gauges
 @app.callback(
     [
         Output("gauge", "figure"),
@@ -448,9 +400,6 @@ style={
 def update_charts(gold, silver, silveroutlay, goldoutlay, ideal, silverdreamprice, golddreamprice, n_intervals):
     """adsfdsf"""
     goldvalue, silvervalue = get_melt_prices(silver, gold)
-    print(goldvalue)
-    # if goldvalue >=1:
-    #     STATE = "ok"
     gold_dollar_value = goldvalue.get("values")
     silver_dollar_value = silvervalue.get("values")
     onces_to_sell_to_make_money = silveroutlay / silvervalue.get("meltprice")
@@ -510,10 +459,7 @@ def update_charts(gold, silver, silveroutlay, goldoutlay, ideal, silverdreampric
             gauge={
                 "axis": {"range": [0, (total + total * 0.25)]},
                 "bar": {"color": "green"},
-                # color={"gradient":True,"ranges":{"green":[0,6],"yellow":[6,8],"red":[8,10]}},
                 "steps": [
-                    #{"range": [0, 150000], "color": "orange"},
-                    #{"range": [140001, 175000], "color": "green"},
                     {"range": [175001, 1000000], "color": "gold"},
                 ],
             },
@@ -586,15 +532,8 @@ def update_charts(gold, silver, silveroutlay, goldoutlay, ideal, silverdreampric
             title={"text": "If Silver dream price is met"},
             #number={"valueformat": ".2f"},
             gauge={
-                #"axis": {"range": [0, (silver * silverdreamprice) * 1.5]},
                 "axis": {"range": [0, 3000000]},
-
                 "bar": {"color": "silver"},
-                # "steps": [
-                #     {"range": [0, 1000001], "color": "red"},
-                #     {"range": [1000001, 2000001], "color": "orange"},
-                #     {"range": [2000001, 3000001], "color": "green"},
-                # ],
             },
         )
     )
@@ -604,9 +543,7 @@ def update_charts(gold, silver, silveroutlay, goldoutlay, ideal, silverdreampric
             value=gold * golddreamprice,
             title={"text": "If Gold dream price is met"},
             gauge={
-                #"axis": {"range": [0, (gold * golddreamprice) * 1.5]},
                 "axis": {"range": [0, 3000000]},
-
                 "bar": {"color": "gold"},
             },
         )
@@ -626,9 +563,6 @@ def update_charts(gold, silver, silveroutlay, goldoutlay, ideal, silverdreampric
     )
 
 
-# Run the app
 if __name__ == "__main__":
-    #app.run_server(host="0.0.0.0", debug=False, port=5000)
-    #app.run_server(host="0.0.0.0", port=8080)$
     app.run(host="0.0.0.0", debug=False, port=5001)
 
