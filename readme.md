@@ -18,3 +18,12 @@ We can also use the sliders to calculate the value of our holdings if the price 
 
 
 <img src="./images/screenshot.png" alt="dsfsdf" width="75%">
+
+# How to use with docker/podman 
+    podman run -d --name silverdaemon -p  5001:5001 albionandrew/goldsilverholdings:v39
+
+or
+
+    podman run  -d --name silverdaemonv3 --env goldholdings=10 --env silverholdings=100 \
+    --env myholdingsstring="The chutlers holdings" -p  5002:5001 \
+    albionandrew/goldsilverholdings:v39
