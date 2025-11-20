@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "goldandsilverstacker.fullname" . }}-test-connection"
+  labels:
+    {{- include "goldandsilverstacker.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "goldandsilverstacker.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
