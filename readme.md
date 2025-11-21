@@ -29,21 +29,21 @@ or
     albionandrew/goldsilverholdings:v39
 
 
-# dsf
+# How to use the helm chart
 
-x@cabin:~/silverplay$ helm install dssd  ./goldandsilverstackerhelmchart/ --set-string holdings.silver=888
-NAME: dssd
-LAST DEPLOYED: Thu Nov 20 17:36:10 2025
-NAMESPACE: kathy
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-x@cabin:~/silverplay$ helm upgrade dssd  ./goldandsilverstackerhelmchart/ --set-string holdings.gold=12
-Release "dssd" has been upgraded. Happy Helming!
-NAME: dssd
-LAST DEPLOYED: Thu Nov 20 17:36:40 2025
-NAMESPACE: kathy
-STATUS: deployed
-REVISION: 2
-TEST SUITE: None
-x@cabin:~/silverplay$
+    x@cabin:~/silverplay$ helm install golddemo  ./goldandsilverstackerhelmchart/ --set-string holdings.silver=888
+    NAME: golddemo
+    LAST DEPLOYED: Thu Nov 20 17:36:10 2025
+    NAMESPACE: kathy
+    STATUS: deployed
+    REVISION: 1
+    TEST SUITE: None
+    x@cabin:~/silverplay$ helm upgrade golddemo  ./goldandsilverstackerhelmchart/ --set-string holdings.gold=12
+    Release "golddemo" has been upgraded. Happy Helming!
+    NAME: golddemo
+    LAST DEPLOYED: Thu Nov 20 17:36:40 2025
+    NAMESPACE: kathy
+    STATUS: deployed
+    REVISION: 2
+    TEST SUITE: None
+    x@cabin:~/silverplay$
