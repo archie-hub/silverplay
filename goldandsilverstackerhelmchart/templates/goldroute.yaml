@@ -1,0 +1,22 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  name: route-circular-octopus
+  labels:
+{{- range $key, $value := .Values.labels }}
+    {{ $key }}: "{{ $value }}"
+{{- end }}
+spec:
+  host: route-circular-octopus-kathy.apps-crc.testing
+  port:
+    targetPort: 5001
+  tls:
+    insecureEdgeTerminationPolicy: Allow
+    termination: edge
+  to:
+    kind: Service
+    name: goldservice
+    weight: 100
+  wildcardPolicy: None

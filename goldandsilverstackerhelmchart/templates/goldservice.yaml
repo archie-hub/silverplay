@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: goldservice
+  labels:
+{{- range $key, $value := .Values.labels }}
+    {{ $key }}: "{{ $value }}"
+{{- end }}
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 5001
+    protocol: TCP
+    targetPort: 5001
+  selector:
+    app: goldfrontend
+  sessionAffinity: None
+  type: ClusterIP

@@ -1,0 +1,9 @@
+labels: 
+  app: goldholdings
+ourString: I'm running from a helm chart.
+holdings:
+  silver: "222" 
+  gold: "111"
+image: albionandrew/goldsilverholdings
+tag: v39
+imagePullPolicy: IfNotPresent 
