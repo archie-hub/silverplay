@@ -27,3 +27,23 @@ or
     podman run  -d --name silverdaemonv3 --env goldholdings=10 --env silverholdings=100 \
     --env myholdingsstring="The chutlers holdings" -p  5002:5001 \
     albionandrew/goldsilverholdings:v39
+
+
+# dsf
+
+x@cabin:~/silverplay$ helm install dssd  ./goldandsilverstackerhelmchart/ --set-string holdings.silver=888
+NAME: dssd
+LAST DEPLOYED: Thu Nov 20 17:36:10 2025
+NAMESPACE: kathy
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+x@cabin:~/silverplay$ helm upgrade dssd  ./goldandsilverstackerhelmchart/ --set-string holdings.gold=12
+Release "dssd" has been upgraded. Happy Helming!
+NAME: dssd
+LAST DEPLOYED: Thu Nov 20 17:36:40 2025
+NAMESPACE: kathy
+STATUS: deployed
+REVISION: 2
+TEST SUITE: None
+x@cabin:~/silverplay$
