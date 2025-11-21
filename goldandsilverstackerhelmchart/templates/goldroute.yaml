@@ -9,7 +9,6 @@ metadata:
     {{ $key }}: "{{ $value }}"
 {{- end }}
 spec:
-  host: route-circular-octopus-kathy.apps-crc.testing
   port:
     targetPort: 5001
   tls:
