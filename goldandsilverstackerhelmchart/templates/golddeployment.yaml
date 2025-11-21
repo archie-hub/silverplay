@@ -23,6 +23,8 @@ spec:
     metadata:
       labels:
         app: goldfrontend
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/goldconfigmap.yaml") . | sha256sum }}
     spec:
       containers:
       - env:
