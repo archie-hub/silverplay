@@ -42,7 +42,9 @@ def new_calculate_our_holdings(holdings, prices):
 def create_ratio(gold, silver):
     """dffd"""
     decimal_value = gold / silver
-    numerator = round(decimal_value)
+    print(decimal_value)
+    numerator = round(decimal_value,2)
+    print(numerator,888)
     return f"{numerator}"
 
 
